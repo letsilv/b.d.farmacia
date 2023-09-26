@@ -1,0 +1,102 @@
+CREATE DATABASE leticiap
+
+use leticiap
+
+CREATE TABLE Cliente (
+    ID_Cliente INT PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Endereco VARCHAR(255),
+    Telefone VARCHAR(15)
+);
+
+
+CREATE TABLE Funcionario (
+    ID_Funcionario INT PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Cargo VARCHAR(50),
+    Salario DECIMAL(10, 2)
+);
+
+
+CREATE TABLE Fornecedor (
+    ID_Fornecedor INT PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Endereco VARCHAR(255),
+    Telefone VARCHAR(15)
+);
+
+
+CREATE TABLE Caixa (
+    ID_Caixa INT PRIMARY KEY,
+    Nome VARCHAR(50),
+    Saldo DECIMAL(10, 2)
+);
+
+
+CREATE TABLE Produto (
+    ID_Produto INT PRIMARY KEY,
+    Nome VARCHAR(255) NOT NULL,
+    Descricao TEXT,
+    Preco DECIMAL(10, 2),
+    QuantidadeEstoque INT,
+    ID_Fornecedor INT,
+    FOREIGN KEY (ID_Fornecedor) REFERENCES Fornecedor(ID_Fornecedor)
+);
+
+
+CREATE TABLE Transacao (
+    ID_Transacao INT PRIMARY KEY,
+    Data DATE,
+    ID_Cliente INT,
+    ID_Funcionario INT,
+    ID_Caixa INT,
+    FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente),
+    FOREIGN KEY (ID_Funcionario) REFERENCES Funcionario(ID_Funcionario),
+    FOREIGN KEY (ID_Caixa) REFERENCES Caixa(ID_Caixa)
+);
+
+INSERT INTO Cliente (ID_Cliente, Nome, Endereco, Telefone)
+VALUES
+    (1, 'Fernanda', 'Marechal Deodoro,230', '(17) 998-736 '),
+    (2, 'João Santos', 'Av. Principal, 456', '(22) 333-7890'),
+    (3, 'Leticia Francisco', '\centro, 98', '(33) 888-5678');
+
+INSERT INTO Funcionario (ID_Funcionario, Nome, Cargo, Salario)
+VALUES
+    (1, 'Pedro Almeida', 'Atendente', 2500.00),
+    (2, 'Marcos Fernades', 'Atendente', 3200.00),
+    (3, 'André Costa', 'Gerente', 4770.00);
+
+INSERT INTO Fornecedor (ID_Fornecedor, Nome, Endereco, Telefone)
+VALUES
+    (1, 'Distribuidora A', 'Rua Comercial, 123', '(11) 555-9876'),
+    (2, 'Fornecedora B', 'Av. Joaquim Alves, 456', '(22) 333-4567'),
+    (3, 'Fábrica de Produtos', 'Centenario, 78', '(33) 888-2345');
+
+INSERT INTO Caixa (ID_Caixa, Nome, Saldo)
+VALUES
+    (1, 'Caixa Principal', 10000.00),
+    (2, 'Caixa Secundário', 5000.00);
+
+
+INSERT INTO Produto (ID_Produto, Nome, Descricao, Preco, QuantidadeEstoque, ID_Fornecedor)
+VALUES
+    (1, 'Medicamento A', 'Descrição do Medicamento A', 25.99, 100, 1),
+    (2, 'Medicamento B', 'Descrição do Medicamento B', 19.99, 50, 2),
+    (3, 'Produto de Higiene C', 'Descrição do Produto C', 5.99, 200, 3);
+
+
+INSERT INTO Transacao (ID_Transacao, Data, ID_Cliente, ID_Funcionario, ID_Caixa)
+VALUES
+    (1, '2023-09-18', 1, 1, 1),
+    (2, '2023-09-18', 2, 2, 1),
+    (3, '2023-09-19', 3, 3, 2);
+
+select * from Cliente
+select * from Funcionario
+select * from Fornecedor
+select * from Caixa
+select * from Produto
+select * from Transacao
+
+
